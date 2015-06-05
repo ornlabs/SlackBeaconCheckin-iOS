@@ -6,12 +6,13 @@
 //  Copyright (c) 2015 MissionData. All rights reserved.
 //
 
-/*TODO: Implement a better way of dealing with edge cases than timeIntervalSince1970
+/*TODO: DONE: Implement a better way of dealing with edge cases than timeIntervalSince1970
+        --using CAMediaTime
         Try to write serverside to be able to see who else in the office
         Add the UUID of the louisville device
         Refactor leave() and enter() into one function
-        Drop the proximity stuff, it's unnecessary
-        --Currently updates once every 60 seconds
+        DONE: Drop the proximity stuff, it's unnecessary
+        --Currently updates once every 15 seconds
 */
 
 import UIKit
@@ -20,11 +21,11 @@ import CoreLocation
 class ViewController: UIViewController, CLLocationManagerDelegate {
 
     @IBOutlet var locationDisplay: UITextView! //Declare a textView
-    var textToDisplay = ""                     //Declare a global string that will hold the text to display
+    var textToDisplay = "Updating your location (once every 60 seconds)"                     //Declare a global string that will hold the text to display
     var atTheOffice = false                    //Declare a global bool @theoffice
     var location = ""
     var user = ""
-    var time:Double = 0         //using this as a measure of time between resets (handle edge cases)
+    var time_ref:Double = 0         //using this as a measure of time between resets (handle edge cases)
     
     //let myTimer: NSTimer = NSTimer.scheduledTimerWithTimeInterval(60, target: self, selector: Selector("function name here"), userInfo: nil, repeats: true)
     let locationManager = CLLocationManager()
@@ -37,7 +38,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         super.viewDidLoad()
         self.automaticallyAdjustsScrollViewInsets = false //set text to top of display
         locationManager.delegate = self                   //set up locationmanager
-        self.time = NSTimeIntervalSince1970
+        self.time_ref = CACurrentMediaTime()
+        
         if (CLLocationManager.authorizationStatus() != CLAuthorizationStatus.AuthorizedAlways) {
             self.locationManager.requestAlwaysAuthorization()
         }
@@ -62,10 +64,15 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     func locationManager(manager: CLLocationManager!, didRangeBeacons beacons:[AnyObject]!, inRegion region: CLBeaconRegion!) {
-        var time_check = NSTimeIntervalSince1970    //get another measure of time
+        var ranOnce = false
+        if !ranOnce {
+            textToDisplay = "Your location will be updated in 30 seconds!"
+            ranOnce = true;
+        }
+        var time_check = CACurrentMediaTime()   //get another measure of time
         
-        if ((time_check - time) > 60) {
-            time = time_check                       //set time to new time
+        if ((time_check - self.time_ref) > 30) {
+            self.time_ref = time_check                       //set time to new time
         
             if region == washington {
                 location = "The F Street Office"
@@ -81,26 +88,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             if (knownBeacons.count > 0) {
                 let closestBeacon = knownBeacons[0] as! CLBeacon //save the beacon
             
-                var proximity = (closestBeacon.proximity)  //get the proximity of closest beacon
-                var proximityDisplay = ""
-                switch(proximity) {
-                case CLProximity.Immediate:
-                    proximityDisplay = "right on top of the beacon!"
-                case CLProximity.Near:
-                    proximityDisplay = "in a room with the beacon!"
-                case CLProximity.Far:
-                    proximityDisplay = "somewhere near the beacon!"
-                case CLProximity.Unknown:
-                    proximityDisplay = "unknown relaive to the beacon!"
-                default:
-                    println("Huh? Switch statement didn't catch you, impossible.")
-                }
-            
                 if (!atTheOffice) {
                     //if you weren't at the office, and now you see a beacon
                     enter(location, user)
                     atTheOffice = true
-                    textToDisplay = "You're at the F Street Office and \(proximityDisplay)"
+                    textToDisplay = "\(user), you're at \(location)"
                 }
             } else if ((knownBeacons.count == 0) && atTheOffice) {
                 //if you were at the office, but now there are no more beacons
@@ -108,10 +100,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                 atTheOffice = false
                 textToDisplay = "You're not at any office. Shouldn't you be working or something?"
             }
-        
-            //Update the text
-            refreshUI()
         }
+        refreshUI()
     }
     
     //Refresh the textView
