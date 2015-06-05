@@ -10,9 +10,10 @@
 		0A99C51B1B1903720052CDD6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A99C51A1B1903720052CDD6 /* AppDelegate.swift */; };
 		0A99C51D1B1903720052CDD6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A99C51C1B1903720052CDD6 /* ViewController.swift */; };
 		0A99C5201B1903720052CDD6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A99C51E1B1903720052CDD6 /* Main.storyboard */; };
-		0A99C5221B1903720052CDD6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A99C5211B1903720052CDD6 /* Images.xcassets */; };
 		0A99C5251B1903720052CDD6 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A99C5231B1903720052CDD6 /* LaunchScreen.xib */; };
 		0A99C5311B1903720052CDD6 /* MDBeaconTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A99C5301B1903720052CDD6 /* MDBeaconTests.swift */; };
+		0ADD21571B1F4AE800A17277 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0ADD21561B1F4AE800A17277 /* CoreLocation.framework */; };
+		0ADD215B1B20A04100A17277 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0ADD215A1B20A04100A17277 /* Images.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,11 +32,12 @@
 		0A99C51A1B1903720052CDD6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0A99C51C1B1903720052CDD6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		0A99C51F1B1903720052CDD6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		0A99C5211B1903720052CDD6 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		0A99C5241B1903720052CDD6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		0A99C52A1B1903720052CDD6 /* MDBeaconTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MDBeaconTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A99C52F1B1903720052CDD6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0A99C5301B1903720052CDD6 /* MDBeaconTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDBeaconTests.swift; sourceTree = "<group>"; };
+		0ADD21561B1F4AE800A17277 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		0ADD215A1B20A04100A17277 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +45,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0ADD21571B1F4AE800A17277 /* CoreLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,6 +62,7 @@
 		0A99C50C1B1903710052CDD6 = {
 			isa = PBXGroup;
 			children = (
+				0ADD21561B1F4AE800A17277 /* CoreLocation.framework */,
 				0A99C5171B1903720052CDD6 /* MDBeacon */,
 				0A99C52D1B1903720052CDD6 /* MDBeaconTests */,
 				0A99C5161B1903720052CDD6 /* Products */,
@@ -80,7 +84,7 @@
 				0A99C51A1B1903720052CDD6 /* AppDelegate.swift */,
 				0A99C51C1B1903720052CDD6 /* ViewController.swift */,
 				0A99C51E1B1903720052CDD6 /* Main.storyboard */,
-				0A99C5211B1903720052CDD6 /* Images.xcassets */,
+				0ADD215A1B20A04100A17277 /* Images.xcassets */,
 				0A99C5231B1903720052CDD6 /* LaunchScreen.xib */,
 				0A99C5181B1903720052CDD6 /* Supporting Files */,
 			);
@@ -161,6 +165,12 @@
 				TargetAttributes = {
 					0A99C5141B1903720052CDD6 = {
 						CreatedOnToolsVersion = 6.3.2;
+						DevelopmentTeam = 86E8Y5JRKT;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					0A99C5291B1903720052CDD6 = {
 						CreatedOnToolsVersion = 6.3.2;
@@ -193,8 +203,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A99C5201B1903720052CDD6 /* Main.storyboard in Resources */,
+				0ADD215B1B20A04100A17277 /* Images.xcassets in Resources */,
 				0A99C5251B1903720052CDD6 /* LaunchScreen.xib in Resources */,
-				0A99C5221B1903720052CDD6 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -340,9 +350,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = MDBeacon/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
@@ -350,9 +364,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = MDBeacon/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
 		};
@@ -409,6 +427,7 @@
 				0A99C5361B1903720052CDD6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0A99C5371B1903720052CDD6 /* Build configuration list for PBXNativeTarget "MDBeaconTests" */ = {
 			isa = XCConfigurationList;
@@ -417,6 +436,7 @@
 				0A99C5391B1903720052CDD6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
