@@ -4,8 +4,6 @@
 <dict>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Big Brother is always watching.</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Big Brother is only watching when the app is open.</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
