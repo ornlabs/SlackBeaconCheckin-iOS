@@ -11,11 +11,11 @@
         DONE:Add a listing of UUIDs on the server side
         DONE:Add a GET request to get the UUIDs, then parse the json
         DONE:Use rails to determine which office you're in, then begin ranging
-        Get the name stuff back in
-        Add authentication to rails
+        DONE:Get the name stuff back in
+        Might be DONE: Add authentication to rails
         Refactor leave() and enter() into one function
         DONE: Drop the proximity stuff, it's unnecessary
-        --Currently updates once every 15 seconds
+        --Currently updates once every 10 seconds
 
 
         //Available Regions
