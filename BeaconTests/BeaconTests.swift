@@ -1,15 +1,15 @@
 //
-//  MDBeaconTests.swift
-//  MDBeaconTests
+//  BeaconTests.swift
+//  BeaconTests
 //
-//  Created by Max Yelsky on 5/29/15.
+//  Created by Max Yelsky on 6/10/15.
 //  Copyright (c) 2015 MissionData. All rights reserved.
 //
 
 import UIKit
 import XCTest
 
-class MDBeaconTests: XCTestCase {
+class BeaconTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
