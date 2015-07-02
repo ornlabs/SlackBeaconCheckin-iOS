@@ -90,7 +90,7 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image" translatesAutoresizingMaskIntoConstraints="NO" id="iUc-gV-VkT">
                                 <rect key="frame" x="175" y="473" width="250" height="39"/>
                             </imageView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LNp-72-oEz">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LNp-72-oEz">
                                 <rect key="frame" x="179" y="154" width="240" height="128"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -100,10 +100,18 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="6jr-k1-3ly">
+                                <rect key="frame" x="290" y="208" width="20" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="1a1-8m-EDa"/>
+                                    <constraint firstAttribute="width" constant="20" id="wAs-IR-Fi2"/>
+                                </constraints>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
+                            <constraint firstAttribute="centerX" secondItem="6jr-k1-3ly" secondAttribute="centerX" id="1JK-Wg-6Qy"/>
                             <constraint firstAttribute="centerX" secondItem="iUc-gV-VkT" secondAttribute="centerX" id="8IZ-7r-a8B"/>
                             <constraint firstAttribute="centerX" secondItem="LNp-72-oEz" secondAttribute="centerX" constant="1" id="hn7-lP-wO3"/>
                             <constraint firstItem="gVU-uH-a6T" firstAttribute="top" secondItem="5e3-ON-JUm" secondAttribute="bottom" constant="351" id="iFT-Uz-PDN"/>
@@ -112,6 +120,7 @@
                             <constraint firstItem="iUc-gV-VkT" firstAttribute="top" secondItem="5e3-ON-JUm" secondAttribute="bottom" constant="453" id="n4e-WT-hA0"/>
                             <constraint firstItem="LNp-72-oEz" firstAttribute="top" secondItem="5e3-ON-JUm" secondAttribute="bottom" constant="134" id="rh9-9l-Qa2"/>
                             <constraint firstAttribute="centerX" secondItem="aax-Nw-3lw" secondAttribute="centerX" constant="-0.5" id="vrG-gy-8ay"/>
+                            <constraint firstItem="6jr-k1-3ly" firstAttribute="top" secondItem="aax-Nw-3lw" secondAttribute="bottom" constant="128" id="wmb-NQ-5tO"/>
                         </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="aIg-Cu-M4h" appends="YES" id="t8s-dp-tuV"/>
@@ -119,6 +128,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="LnC-1e-Izf"/>
                     <connections>
+                        <outlet property="loadingActivity" destination="6jr-k1-3ly" id="VPM-Eb-6Ll"/>
                         <outlet property="textDisplay" destination="LNp-72-oEz" id="FZe-02-QQf"/>
                     </connections>
                 </viewController>

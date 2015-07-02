@@ -11,26 +11,46 @@ import UIKit
 class ViewController: UIViewController {
     
     @IBOutlet var textDisplay: UITextView!
-    @IBOutlet var setNameButton: UIButton!
-    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-    let notification = NSNotificationCenter.defaultCenter()
+    @IBOutlet weak var loadingActivity: UIActivityIndicatorView!
+    
+    private var observer: NSObjectProtocol?
+    private var initialLoading:Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let defaults = NSUserDefaults.standardUserDefaults()
-
-        if defaults.stringForKey("name") == nil {
-            appDelegate.textToDisplay = "Please set your Username!"
-            refreshUI()
+        self.initialLoading = true
+        
+        if NSUserDefaults.standardUserDefaults().stringForKey("name") == nil {
+            self.refreshUI("Please set your Username!")
+            self.initialLoading = false
         }
         
-        notification.addObserver(self, selector: "refreshUI", name: "textNotification", object: appDelegate)
-
+        self.displaySpinner()
+        
+        self.observer = NSNotificationCenter.defaultCenter().addObserverForName("textNotification", object: nil, queue: nil) { (notification:NSNotification!) -> Void in
+            
+            self.initialLoading = false
+            
+            if let userInfo:Dictionary<String,String!> = notification.userInfo as? Dictionary<String,String!> {
+                if let message = userInfo["text"] {
+                    self.refreshUI(message)
+                }
+            }
+            
+        }
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        self.displaySpinner()
+    }
+    
+    deinit {
+        if let observer = self.observer {
+            NSNotificationCenter.defaultCenter().removeObserver(observer)
+        }
     }
     
     //Dismiss the keyboard if the user presses the display
@@ -38,14 +58,26 @@ class ViewController: UIViewController {
         textDisplay.resignFirstResponder()
     }
     
-    func refreshUI() {
+    func refreshUI(message:String) {
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            self.loadingActivity.hidden = true
+            self.loadingActivity.stopAnimating()
+            
             self.automaticallyAdjustsScrollViewInsets = false //set text to top of display
-            self.textDisplay.text = self.appDelegate.textToDisplay
+            self.textDisplay.text = message
             self.textDisplay.font = UIFont(name: "Futura-Medium", size: 20) //set font size
             self.textDisplay.textAlignment = .Center
         })
     }
 
+    func displaySpinner() {
+        if self.initialLoading {
+            self.loadingActivity.hidden = false
+            self.loadingActivity.startAnimating()
+        } else {
+            self.loadingActivity.hidden = true
+            self.loadingActivity.stopAnimating()
+        }
+    }
 }
 

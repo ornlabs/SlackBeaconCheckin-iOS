@@ -83,12 +83,12 @@
 			children = (
 				0AE261A41B2871610069A96B /* AppDelegate.swift */,
 				0AE261A61B2871610069A96B /* ViewController.swift */,
+				0AE261C61B2897680069A96B /* SlackNameViewController.swift */,
 				0AE261A81B2871610069A96B /* Main.storyboard */,
+				0AE261C41B2873B60069A96B /* APICaller.swift */,
 				0AE261AB1B2871610069A96B /* Images.xcassets */,
 				0AE261AD1B2871610069A96B /* LaunchScreen.xib */,
 				0AE261A21B2871610069A96B /* Supporting Files */,
-				0AE261C41B2873B60069A96B /* APICaller.swift */,
-				0AE261C61B2897680069A96B /* SlackNameViewController.swift */,
 			);
 			path = Beacon;
 			sourceTree = "<group>";
@@ -424,6 +424,7 @@
 				0AE261C01B2871610069A96B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0AE261C11B2871610069A96B /* Build configuration list for PBXNativeTarget "BeaconTests" */ = {
 			isa = XCConfigurationList;
@@ -432,6 +433,7 @@
 				0AE261C31B2871610069A96B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
