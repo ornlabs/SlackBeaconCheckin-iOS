@@ -18,15 +18,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     let defaults = NSUserDefaults.standardUserDefaults()
     
     let notification = NSNotificationCenter.defaultCenter()
-
-    var closestBeacon = CLBeacon()
-    var foundOne = false
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         ///////////////SETUP/////////////////////
         
-        application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: UIUserNotificationType.Sound | UIUserNotificationType.Alert | UIUserNotificationType.Badge, categories: nil))
+        application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: UIUserNotificationType.Alert, categories: nil))
         self.locationManager.requestAlwaysAuthorization()
         self.locationManager.delegate = self
         self.locationManager.pausesLocationUpdatesAutomatically = false
@@ -39,24 +36,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
             array.enumerateObjectsUsingBlock( {object, index, stop in
                 var txt: NSString = object.valueForKey("uuid") as! NSString
                 var location: NSString = object.valueForKey("location") as! NSString
-                let beaconUUID = NSUUID(UUIDString: txt as String) //White tag
+                let beaconUUID = NSUUID(UUIDString: txt as String)
                 let beaconRegion = CLBeaconRegion(proximityUUID: beaconUUID, identifier: location as String)
                 self.locationManager.startMonitoringForRegion(beaconRegion)
                 self.locationManager.startRangingBeaconsInRegion(beaconRegion)
-                println("Monitoring: \(location as String)")
             })
-            }
+        }
         ///////////////END UUIDS, NOW MONITORING/////////////////////////////////
         
 
-        //self.locationManager.startRangingBeaconsInRegion(beaconRegion)
         self.locationManager.startUpdatingLocation()
         return true
     }
     
     func locationManager(manager: CLLocationManager!, didEnterRegion region: CLRegion!) {
-        println("Entered")
         var office = region.identifier
+        
         //notification
         if let beaconRegion = region as? CLBeaconRegion {
             var notification = UILocalNotification()
@@ -64,6 +59,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
             notification.soundName = "Default"
             UIApplication.sharedApplication().presentLocalNotificationNow(notification)
         }
+        
         //post to Slack
         if let userName = self.defaults.stringForKey("name") {
             APICaller.sharedInstance.postToSlack(userName, location: region.identifier, direction: "enter", successFunction: { () -> Void in
@@ -80,7 +76,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     }
     
     func locationManager(manager: CLLocationManager!, didExitRegion region: CLRegion!) {
-        println("Exited")
         var office = region.identifier
         
         //notfication
@@ -90,6 +85,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
             notification.soundName = "Default"
             UIApplication.sharedApplication().presentLocalNotificationNow(notification)
         }
+        
         //post to slack
         if let userName = self.defaults.stringForKey("name") {
             APICaller.sharedInstance.postToSlack(userName, location: region.identifier, direction: "leave", successFunction: { () -> Void in
@@ -107,19 +103,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     
     func locationManager(manager: CLLocationManager!, didRangeBeacons beacons: [AnyObject]!, inRegion region: CLBeaconRegion!) {
         var office = region.identifier
-        println("Now ranging \(region.identifier)")
+        
+        var foundOne = false
+        var closestBeacon = CLBeacon()
+        
         if beacons.count > 0 {
-            self.closestBeacon = beacons[0] as! CLBeacon
+            closestBeacon = beacons[0] as! CLBeacon
             if let userName = defaults.stringForKey("name") {
                 APICaller.sharedInstance.postToSlack(userName, location: region.identifier, direction: "enter", successFunction: { () -> Void in
-                    self.textToDisplay = "\(userName), slack just noticed you at the \(office) office"
-                    self.notification.postNotificationName("textNotification", object: self)
-                    println("Posted to slack")
+                        self.textToDisplay = "\(userName), slack just noticed you at the \(office) office"
+                        self.notification.postNotificationName("textNotification", object: self)
+                        println("Posted to slack")
                     }, errorFunction: { (err) -> Void in
                         println("FAILED")
                 })
             }
-            self.foundOne = true;
+            foundOne = true;
             self.locationManager.stopRangingBeaconsInRegion(region)
         }
         

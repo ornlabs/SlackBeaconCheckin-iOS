@@ -39,10 +39,12 @@ class ViewController: UIViewController {
     }
     
     func refreshUI() {
-        self.automaticallyAdjustsScrollViewInsets = false //set text to top of display
-        textDisplay.text = appDelegate.textToDisplay
-        textDisplay.font = UIFont(name: "Futura-Medium", size: 20) //set font size
-        textDisplay.textAlignment = .Center
+        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            self.automaticallyAdjustsScrollViewInsets = false //set text to top of display
+            self.textDisplay.text = self.appDelegate.textToDisplay
+            self.textDisplay.font = UIFont(name: "Futura-Medium", size: 20) //set font size
+            self.textDisplay.textAlignment = .Center
+        })
     }
 
 }
