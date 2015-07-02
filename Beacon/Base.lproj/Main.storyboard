@@ -16,8 +16,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Your Name Here" textAlignment="center" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="03J-Jb-fMm">
+                                <rect key="frame" x="244" y="67" width="112" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <textInputTraits key="textInputTraits" keyboardAppearance="alert"/>
+                            </textField>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image" translatesAutoresizingMaskIntoConstraints="NO" id="7c3-ZJ-icm">
+                                <rect key="frame" x="180" y="473" width="250" height="39"/>
+                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dmA-c2-bp3">
-                                <rect key="frame" x="225" y="250" width="151" height="30"/>
+                                <rect key="frame" x="230" y="117" width="151" height="30"/>
                                 <state key="normal" title="Save Slack Username">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -26,24 +35,15 @@
                                     <segue destination="BYZ-38-t0r" kind="show" id="Dkk-wh-7qS"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Your Name Here" textAlignment="center" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="03J-Jb-fMm">
-                                <rect key="frame" x="244" y="175" width="112" height="30"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <textInputTraits key="textInputTraits" keyboardAppearance="alert"/>
-                            </textField>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image" translatesAutoresizingMaskIntoConstraints="NO" id="7c3-ZJ-icm">
-                                <rect key="frame" x="180" y="473" width="250" height="39"/>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="03J-Jb-fMm" secondAttribute="centerX" id="2r3-tZ-Fya"/>
-                            <constraint firstItem="03J-Jb-fMm" firstAttribute="top" secondItem="3d4-mV-2wg" secondAttribute="bottom" constant="155" id="DVA-6v-D8F"/>
+                            <constraint firstItem="03J-Jb-fMm" firstAttribute="top" secondItem="3d4-mV-2wg" secondAttribute="bottom" constant="47" id="DVA-6v-D8F"/>
                             <constraint firstItem="7c3-ZJ-icm" firstAttribute="top" secondItem="3d4-mV-2wg" secondAttribute="bottom" constant="453" id="NcI-Ue-ixS"/>
                             <constraint firstAttribute="centerX" secondItem="7c3-ZJ-icm" secondAttribute="centerX" constant="-5" id="S6k-nd-S0x"/>
-                            <constraint firstAttribute="centerX" secondItem="dmA-c2-bp3" secondAttribute="centerX" constant="-0.5" id="TUO-uC-lQw"/>
-                            <constraint firstItem="dmA-c2-bp3" firstAttribute="top" secondItem="03J-Jb-fMm" secondAttribute="bottom" constant="45" id="cCv-bt-Ivd"/>
+                            <constraint firstAttribute="centerX" secondItem="dmA-c2-bp3" secondAttribute="centerX" constant="-5.5" id="TUO-uC-lQw"/>
+                            <constraint firstItem="dmA-c2-bp3" firstAttribute="top" secondItem="03J-Jb-fMm" secondAttribute="bottom" constant="20" id="cCv-bt-Ivd"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="7Mf-ij-b7C"/>

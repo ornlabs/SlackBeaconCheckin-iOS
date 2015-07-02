@@ -6,10 +6,6 @@
 //  Copyright (c) 2015 MissionData. All rights reserved.
 //
 
-
-//              Notes
-//      Make sure to label every parameter but the first one in Swift
-
 import UIKit
 
 class ViewController: UIViewController {
@@ -21,10 +17,9 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        println("Now calling ViewDidLoad")
+        
         let defaults = NSUserDefaults.standardUserDefaults()
 
-        
         if defaults.stringForKey("name") == nil {
             appDelegate.textToDisplay = "Please set your Username!"
             refreshUI()
@@ -50,13 +45,5 @@ class ViewController: UIViewController {
         textDisplay.textAlignment = .Center
     }
 
-}
-
-func success() {
-    println("Good work.")
-}
-
-func error(NSError!) {
-    println("Damn.")
 }
 

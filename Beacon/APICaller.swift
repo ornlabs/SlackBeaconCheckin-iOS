@@ -10,8 +10,8 @@ import Foundation
 
 class APICaller : NSObject {
     
-    private let APIDomain = ""
-    private let baseAPIURL = "http://10.0.1.65/api/v1/"
+    private let APIDomain = "com.missiondata.error"
+    private let baseAPIURL = "TODO"
     
     class var sharedInstance : APICaller {
         struct Static {
@@ -28,7 +28,7 @@ class APICaller : NSObject {
     //Pass enter a name, location, a function to call on success and a function to call if an error is found
     func postToSlack(name: String, location: String, direction: String, successFunction: (() -> Void), errorFunction: ((NSError) -> Void)) {
         // Make the HTTP call, use baseAPIURL as the starting point of the call
-        let url = NSURL(string: "http://10.0.1.65:3000/api/v1/\(direction).json")
+        let url = NSURL(string: "\(baseAPIURL)\(direction).json")
         println(url)
         var request:NSMutableURLRequest = NSMutableURLRequest(URL: url!)
         let array = [ "slack_post": ["name":"\(name)", "location":"\(location)"]]
@@ -51,7 +51,7 @@ class APICaller : NSObject {
     }
     
     func getUUIDs(completionHandler: ((array: NSArray) -> Void)) {
-        var request: NSMutableURLRequest = NSMutableURLRequest(URL: NSURL(string: "http://10.0.1.65:3000/api/v1/uuids.json")!)
+        var request: NSMutableURLRequest = NSMutableURLRequest(URL: NSURL(string: "\(baseAPIURL)uuids.json")!)
         var session = NSURLSession.sharedSession()
         request.HTTPMethod = "GET"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
